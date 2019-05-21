@@ -5,16 +5,20 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 
-public class InterfazApp extends JFrame implements ActionListener{
+import controlador.Controlador;
+
+public class InterfazApp extends JFrame{
 	
 	PanelA pnlA;
+	Controlador ctrl;
 
-	public InterfazApp() {
-		// TODO Auto-generated constructor stub
-		pnlA = new PanelA();
+	public InterfazApp(Controlador ctrl) {
+		this.ctrl = new Controlador();
+		pnlA = new PanelA(ctrl);
+		ctrl.conectar(pnlA);
 		
 		setSize(500,500);
-		setTitle("Qué se dice Padrecito");
+		setTitle("Interfaz");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(null);
 		
@@ -26,15 +30,11 @@ public class InterfazApp extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
+	
+	
 	public static void main(String[] args) {
-		InterfazApp frmMain = new InterfazApp();
+		InterfazApp frmMain = new InterfazApp(new Controlador());
 		frmMain.setVisible(true);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

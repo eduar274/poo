@@ -12,72 +12,50 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
+import controlador.Controlador;
+
 public class PanelA extends JPanel implements ActionListener{
 	
-	JLabel a = new JLabel("Nooooo");
-	JLabel b= new JLabel("Moooo");
+	Controlador ctrl;
 	
-	JButton c = new JButton("(☞ﾟ∀ﾟ)☞");
-	JButton d = new JButton("(☞ﾟ∀ﾟ)☞");
-	JButton f = new JButton("ᕙ(⇀‸↼‶)ᕗ");
-	static boolean x = false;
-	static boolean y = false;
-	static boolean z = false;
+	JLabel a = new JLabel("");
+	JButton aceptar = new JButton("Aceptar");
+	JButton cancelar = new JButton("Cancelar");
 
-	public PanelA(){
+
+	public PanelA(Controlador ctrl){
+		
+		this.ctrl = ctrl;
+		
 		setSize(500,500);
 		setLayout(null);
 		setBorder(new CompoundBorder(new EmptyBorder(0, 0, 0, 0), new TitledBorder("TEZ")));
 		a.setBounds(10, 10, 100, 30);
 		a.setFont(new Font(null, Font.ITALIC, 12));
-		//add(a);
 		
-		//add(b);
-		c.setBounds(10,80, 280, 30);
-		c.addActionListener(this);
-		add(c);
-		d.setBounds(15, 15, 100, 30);
-		add(d);
-		f.setBounds(35, 200, 100, 30);
-		add(f);
-		f.setVisible(false);
+		aceptar.setBounds(10,80, 280, 30);
+		aceptar.addActionListener(this);
+		add(aceptar);
+		
+		cancelar.setBounds(10,120, 280, 30);
+		cancelar.addActionListener(this);
+		add(cancelar);
 	}
-
+	
+	public void estadoSwitch() {
+		ctrl.estadoSwitch();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equalsIgnoreCase(c.getText())) {
-
-			if(x) {
-				d.setVisible(true);
-				x = false;
-			}else {
-				d.setVisible(false);
-				x = true;
-			}
+		if(e.getActionCommand().equalsIgnoreCase(aceptar.getText())) {
+			ctrl.aceptar();
+			
 		}else {
-			if(e.getActionCommand().equalsIgnoreCase(d.getText())) {
-
-				if(y) {
-					f.setVisible(true);
-					y = false;
-				}else {
-					f.setVisible(false);
-					y = true;
-				}
-			}else {
-				if(e.getActionCommand().equalsIgnoreCase(f.getText())) {
-
-					if(z) {
-						c.setVisible(true);
-						z = false;
-					}else {
-						c.setVisible(false);
-						z = true;
-					}
-				}
+			if(e.getActionCommand().equalsIgnoreCase(cancelar.getText())) {
+				ctrl.cancelar();
+				
 			}
 		}
-		
-		
 	}
 }
